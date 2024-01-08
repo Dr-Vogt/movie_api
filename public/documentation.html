@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Documentation</title>
+    <title>API Endpoint Documentation</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <main>
-        <h1>Welcome to the Documentation</h1>  
-    </main>
+</head>
+  
+    
+      
+      
+     
+      <body>
+        <h1>API Endpoint Documentation</h1>
+      
+        <section>
+          <h2>Create a new user</h2>
+          <p><strong>POST /users</strong></p>
+          <p><strong>Parameters:</strong> req.body - User object to be created (requires 'name' property)</p>
+          <p><strong>Returns:</strong> Created user object</p>
+          <p><strong>Errors:</strong> 
+            <ul>
+              <li>400 - Users need a name</li>
+              <li>201 - User successfully created</li>
+            </ul>
+          </p>
+        </section> 
+       
+    
 	
   </body>
 </html>
