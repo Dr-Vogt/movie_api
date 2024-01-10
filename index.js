@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/documentation', (req, res) =>{
-  
+  res.sendFile('public/documentation.html', { root: __dirname });
 });
 
 app.get('/secreturl', (req, res) => {
