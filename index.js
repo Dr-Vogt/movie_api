@@ -35,81 +35,9 @@ app.get('/secreturl', (req, res) => {
   res.send('This is a secret url with super top-secret content.');
 });
 
-//let users = [
-  //{
-    //id: 1,
-   // name: "Nick",
-   // favoriteMovies: ["Howl\'s Moving Castle"]
- // },
-  //{
-  //  id: 2,
-   // name: "Justine",
-   // favoriteMovies: []
-  //},
 
-//]
 
-let movies = [
-    {
-      "Title": 'Spirited Away',
-      "Description": "A movie",
-      "Genre": {
-        "Name": "Fantasy",
-        "Description": "Imagination unleashed, conjuring magical worlds, mythical beings, and epic adventures beyond reality's bounds."
-      },
-      "Director": { 
-        "Name": "Hayao Miyazaki", 
-        "Bio": "Hayao Miyazaki is a legendary Japanese animator and filmmaker, born on January 5, 1941, in Tokyo. Co-founding Studio Ghibli, he's known for timeless masterpieces like Spirited Away, My Neighbor Totoro, and Princess Mononoke. His hand-drawn animations and profound storytelling, often centered on nature and human experience, have earned global acclaim, making him an icon in the world of animation.",
-        "Birth": 1941.0
-      },
-    },
 
-    {
-      "Title": 'Howl\'s Moving Castle',
-      "Description": "A movie",
-      "Genre": {
-        "Name": "Fantasy",
-        "Description": "Imagination unleashed, conjuring magical worlds, mythical beings, and epic adventures beyond reality's bounds."
-      },
-      "Director": { 
-        "Name": "Hayao Miyazaki", 
-        "Bio": "Hayao Miyazaki is a legendary Japanese animator and filmmaker, born on January 5, 1941, in Tokyo. Co-founding Studio Ghibli, he's known for timeless masterpieces like Spirited Away, My Neighbor Totoro, and Princess Mononoke. His hand-drawn animations and profound storytelling, often centered on nature and human experience, have earned global acclaim, making him an icon in the world of animation.",
-        "Birth": 1941.0
-      },
-    },
-    {
-      "Title": 'Twilight',
-      "Director": 'Catherine Hardwicke'
-    },
-    {
-      "Title": 'One Piece Film: Red',
-      "Director": 'Goro Taniguchi'  
-    },
-    {
-      "Title": 'Kiki\'s Delivery Service',
-      "Director": 'Hayao Miyazaki'
-    },
-    {
-      "Title": 'Porco Rosso',
-      "Director": 'Hayao Miyazaki'
-    },
-    {
-      "Title": 'Ponyo',
-      "Director": 'Hayao Miyazaki'  
-    },
-    {
-      "Title": 'Barbie',
-      "Director": 'Greta Gerwig'  
-    },
-    {
-      "Title": 'If I Stay',
-      "Director": 'R. J. Cutler'  
-    },
-    {
-      "Title": 'Godzilla',
-      "Director": 'Ishiro Honda'  
-    },
-  ];
   
   
   app.get('/', (req, res) => {
