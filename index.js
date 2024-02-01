@@ -77,8 +77,7 @@ app.get('/secreturl', (req, res) => {
         if (user) {
           return res.status(400).send(req.body.Username + 'already exists');
         } else {
-          Users
-            .create({
+          Users.create({
               Username: req.body.Username,
               Password: hashedPassword,
               Email: req.body.Email,
@@ -191,14 +190,13 @@ app.get('/secreturl', (req, res) => {
   });
 
   app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    Movies.find()
-      .then((movies) =>{
-        res.status(201).json(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      });
+    try {
+      const movies = await Movies.find();
+      res.json(movies);
+    } catch (error) {
+      console.error('Error', error);
+      res.status(500).json({ error: 'Error' });
+    }
   });
 
   app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), async (req, res) => {
