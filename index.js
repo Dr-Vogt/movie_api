@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const http = require('http');
 const { check, validationResult } = require('express-validator');
+require('dotenv').config();
 bodyParser = require('body-parser'),
 uuid = require('uuid'),
 morgan = require('morgan'),
@@ -19,7 +20,7 @@ const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/cFDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.CONNECTION_URI).then(() => console.log("connected to mongodb"));
 
 app.use(morgan('combined', {stream: accessLogStream}));
 
