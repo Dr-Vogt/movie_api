@@ -66,13 +66,13 @@ app.get('/secreturl', (req, res) => {
     check('Username', 'Username contains non alpanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()], 
-     (req, res) => {
+    async (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }  
     let hashedPassword = Users.hashedPassword(req.body.Password);
-     Users.findOne({ Username: req.body.Username})
+    await Users.findOne({ Username: req.body.Username})
       .then((user) => {
         if (user) {
           return res.status(400).send(req.body.Username + 'already exists');
