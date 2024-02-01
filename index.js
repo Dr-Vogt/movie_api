@@ -58,9 +58,6 @@ app.get('/secreturl', (req, res) => {
   res.send('This is a secret url with super top-secret content.');
 });
 
-
-
-
   
   
   app.get('/', (req, res) => {
