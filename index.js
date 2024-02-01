@@ -1,18 +1,15 @@
 const express = require("express");
 const app = express();
-const http = require('http');
 const { check, validationResult } = require('express-validator');
 require('dotenv').config();
-bodyParser = require('body-parser'),
-uuid = require('uuid'),
-morgan = require('morgan'),
-  fs = require('fs'), 
-  path = require('path');
-
-
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-const mongoose = require('mongoose');
+
 const Models = require('./models.js');
 
 const Movies = Models.Movie;
@@ -23,12 +20,12 @@ const Users = Models.User;
 mongoose.connect(process.env.CONNECTION_URI).then(() => console.log("connected to mongodb"));
 
 app.use(morgan('combined', {stream: accessLogStream}));
+app.use(express.json());
+app.use(express.static('public'));
 
-app.use(bodyParser.json());
+// app.use(express.urlencoded({ extended: true})); //<---
 
-app.use(bodyParser.urlencoded({ extended: true}));
 
-const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
@@ -65,7 +62,7 @@ app.get('/secreturl', (req, res) => {
     res.send('Welcome to my movie club!');
   });
   
-  app.post('/users' [check('Username', 'Username is required').isLength({min: 4}),
+  app.post('/users', [check('Username', 'Username is required').isLength({min: 4}),
     check('Username', 'Username contains non alpanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()], 
@@ -100,16 +97,27 @@ app.get('/secreturl', (req, res) => {
       });
   });
 
+  // app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
+  //    Users.find()
+  //     .then((users) => {
+  //       res.status(201).json(users);
+  //     })
+  //     .catch((err) => {
+  //     console.error(err);
+  //     res.status(500).send('Error: ' + err);
+  //   });
+  // });
+
   app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    await Users.find()
-      .then((users) => {
-        res.status(201).json(users);
-      })
-      .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
+   try {
+    const users =  await Users.find()
+    res.status(201).json(users);
+   } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+   }
   });
+
 
   app.get('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => {
     await Users.findOne({ Username: req.params.Username })
@@ -227,7 +235,7 @@ app.get('/secreturl', (req, res) => {
     });
   });
 
-  app.use(express.static('public'));
+
 
   app.use((err, req, res, next) => {
     console.error(err.stack);
