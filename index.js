@@ -149,8 +149,8 @@ app.get('/secreturl', (req, res) => {
 
   });
 
-  app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username }, { $push: { FavoriteMovies: req.params.MovieID }
+  app.post('/users/:Username/movies/:Title', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    await Users.findOneAndUpdate({ Username: req.params.Username }, { $push: { FavoriteMovies: req.params.Title }
     },
     { new: true })
     .then((updatedUser) => {
