@@ -129,6 +129,7 @@ app.get('/secreturl', (req, res) => {
   });
 
   app.put('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    let hashPassword = Users.hashPassword(req.body.Password);
     await Users.findOneAndUpdate({ Username: req.params.Username}, {$set:
     {
       Username: req.body.Username,
