@@ -62,7 +62,7 @@ app.get('/secreturl', (req, res) => {
     res.send('Welcome to my movie club!');
   });
   
-  app.post('/users', [check('Username', 'Username is required').isLength({min: 4}),
+  app.post('/signup', [check('Username', 'Username is required').isLength({min: 4}),
     check('Username', 'Username contains non alpanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()], 
