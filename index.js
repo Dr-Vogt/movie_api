@@ -190,7 +190,7 @@ app.get('/secreturl', (req, res) => {
       });
   });
 
-  app.get('/movies', async (req, res) => {
+  app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
       const movies = await Movies.find();
       res.json(movies);
