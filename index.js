@@ -26,7 +26,7 @@ app.use(express.static('public'));
 // app.use(express.urlencoded({ extended: true})); //<---
 
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://drvogtflix.netlify.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
