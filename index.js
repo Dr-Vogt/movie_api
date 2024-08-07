@@ -122,12 +122,18 @@ app.get('/secreturl', (req, res) => {
 
   app.get('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-     const users = await Users.findOne()
-     res.status(201).json(users); 
+      const username = req.params.Username;
+      const user = await Users.findOne({ Username: username });
+  
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+  
+      res.status(200).json(user);
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-      };
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    }
   });
 
   app.put('/users/:Username', passport.authenticate('jwt', {session: false}), async (req, res) => {
